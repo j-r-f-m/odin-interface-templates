@@ -15,8 +15,11 @@
   },
   "rules": {
     "quotes": [
-        "error",
-        "double"
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error"
     ]
   }
 }

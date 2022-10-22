@@ -49,7 +49,7 @@ module.exports = {
   devtool: "source-map",
   plugins: [
     new HtmlWebpackPlugin({
-      title: "navbar",
+      title: "dropdown",
       filename: "index.html",
       template: "src/template.html",
     }),

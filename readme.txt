@@ -30,6 +30,10 @@
     - answer questions
 2. create .eslintignore:    touch .eslintignore 
     - check last project
-3. npm install --save-dev eslint-config-prettier
+3.1 install prettier???
+3.2 npm install --save-dev eslint-config-prettier
 ??????3. add script to package.json:  "lint": "eslint . --ext .ts"
 
+
+------------------------------------ III General III ---------------------------
+1. user css reset: https://meyerweb.com/eric/tools/css/reset/
