@@ -1,3 +1,5 @@
+// dropdown menu template
+
 import { NodeFac } from "./dom";
 
 /**
@@ -7,10 +9,14 @@ import { NodeFac } from "./dom";
  */
 const dropDownOptions = (numElem) => {
   for (let i = 0; i < numElem; i += 1) {
-    const currLink = NodeFac("a", "dropdown-container", `Link ${i}`).crtNode();
+    const currLink = NodeFac(
+      "div",
+      "dropdown-container",
+      `Link ${i}`
+    ).crtNode();
     currLink.id = `link-${i}`;
     currLink.className = "link";
-    currLink.setAttribute("href", "");
+    // currLink.setAttribute("href", "");
   }
 };
 

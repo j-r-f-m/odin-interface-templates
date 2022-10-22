@@ -62,6 +62,8 @@ body {
 }
 
 /* --------------------------------- style ---------------------------------- */
+
+/* +++++++++++++++++++++++++++++ dropdown +++++++++++++++++++++++++++++++++ */
 #dropdown-container {
     border: solid 1px red;
 }
@@ -90,6 +92,21 @@ body {
 
 .link {
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-
+    text-decoration: none;
 }
 
+/* ++++++++++++++++++++++++++++++++++++ navbar +++++++++++++++++++++++++++ */
+#navbar-container {
+
+    height: 1.5rem;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-navbar {
+    border: solid 1px red;
+    padding: 1.5rem;
+    text-decoration: none;
+}
