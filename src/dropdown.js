@@ -1,4 +1,3 @@
-import hideShow from "./logic";
 import { NodeFac } from "./dom";
 
 /**
@@ -16,9 +15,22 @@ const dropDownOptions = (numElem) => {
 };
 
 /**
+ * hide or show the options available from the dropdown
+ *
+ * @param {string} hideOrShow none or display -> hide or show options
+ */
+const hideShow = (hideOrShow) => {
+  const links = document.getElementsByClassName("link");
+  // iterate through links and change their display style
+  for (let i = 0; i < links.length; i += 1) {
+    links[i].style.display = hideOrShow;
+  }
+};
+
+/**
  * template for creating dropdown menu
  */
-const dropdown = () => {
+export default () => {
   // dropdwon contaner
   const dropdownContainer = NodeFac("div", "content").crtNode();
   dropdownContainer.id = "dropdown-container";
@@ -37,5 +49,3 @@ const dropdown = () => {
     }
   });
 };
-
-export { dropdown };
