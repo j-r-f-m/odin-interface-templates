@@ -2,11 +2,6 @@
 
 import { NodeFac } from "./dom";
 
-const setBackgroundColor = (element) => {
-  const currEle = element;
-  currEle.parentNode.style.backgroundColor = "";
-};
-
 /**
  * reset background color of navbar options
  *
