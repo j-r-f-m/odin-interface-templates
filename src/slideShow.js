@@ -28,7 +28,8 @@ const addImg = (parenObj, image) => {
 
 /**
  * calculate idex of current Slide if the left arrow was clicked
- * @param
+ * @param {number} currIdx current index of slider
+ * @return {number} newIdx that will display the wanted image
  *
  */
 const LeftCalIdx = (currIdx) => {
@@ -46,7 +47,7 @@ const LeftCalIdx = (currIdx) => {
 /**
  * create left arrow-button that changes the images in the left direction
  *
- *
+ *@param {object} parentObj parent object of image
  */
 const crtLeftArrow = (parentObj) => {
   // add left arrow
