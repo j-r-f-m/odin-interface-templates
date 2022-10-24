@@ -62,34 +62,7 @@ const dotCalIdx = (e) => {
 };
 
 /**
- * event listeners for the empty dots
- *
- * @param {object}
- */
-const dotEvent = (objEvent) => {
-  const obj = objEvent;
-  obj.addEventListener("click", (e) => {
-    // delete old image
-    dltNodeById(`image-${CURR_SLIDER_IDX}`);
-    // delete old full dot
-    dltNodeById(`dot-${CURR_SLIDER_IDX}`);
-    // create old empty dot
-    setEmptyDot(CURR_SLIDER_IDX);
-    // update the CURRENT_SLIDER_IDX !!!!!!!!!!!!!
-    // get slideshow-container to load new image
-    const parentSlide = e.target.parentElement.parentElement.parentElement;
-    CURR_SLIDER_IDX = dotCalIdx(e);
-    // load new image with revcieved idx
-    addSlide(parentSlide, CURR_SLIDER_IDX);
-    // delete empty dot of new image
-    dltNodeById(`dot-${CURR_SLIDER_IDX}`);
-    // set full dot
-    setFullDot(CURR_SLIDER_IDX);
-  });
-};
-
-/**
- * set empty dot at CURR_SLIDER_IDX
+ * set empty dot at CURR_SLIDER_IDX with using dotEvent
  *
  * @param {number} currIdx CURR_SLIDER_IDX of current slide
  */
@@ -104,29 +77,6 @@ const setEmptyDot = (currIdx) => {
   parentCurrDot.appendChild(emptyDot);
   // add eventlistener
   dotEvent(emptyDot);
-};
-
-/**
- * create the empty dots for images in ARR_SLIDER
- * this function is only used in the beginning
- */
-const dots = () => {
-  const dotsCon = NodeFac("div", "slideshow-container").crtNode();
-  dotsCon.id = "dots-container";
-  for (let i = 0; i < ARR_SLIDER.length; i += 1) {
-    // create parent div for each dot
-    const dotDiv = NodeFac("div", "dots-container").crtNode();
-    dotDiv.id = `id-div-dot-${i}`;
-    // create dot icon
-    const currDot = new Image();
-    currDot.src = dotEmpty;
-    currDot.id = `dot-${i}`;
-    currDot.className = "dot";
-    dotDiv.appendChild(currDot);
-
-    // add eventlistener
-    dotEvent(currDot);
-  }
 };
 
 /**
@@ -184,6 +134,35 @@ const RightCalIdx = (currIdx) => {
 };
 
 /**
+ * advance slide every 5 seconds
+ *
+ */
+const automChangeSlides = () => {
+  // delete old slides and create new ones
+
+  // slideshow container
+  const slideShowCon = document.getElementById("slideshow-container");
+
+  // delete old image
+  dltNodeById(`image-${CURR_SLIDER_IDX}`);
+  // delete old full dot
+  dltNodeById(`dot-${CURR_SLIDER_IDX}`);
+  // create old empty dot
+  setEmptyDot(CURR_SLIDER_IDX);
+  // calculate new CURR_SLIDER_IDX !!!!!!!!!!!
+  CURR_SLIDER_IDX = RightCalIdx(CURR_SLIDER_IDX);
+  // show next image with updated CURR_SLIDER_IDX
+  addSlide(slideShowCon, CURR_SLIDER_IDX);
+  // delete empty dot of new image
+  dltNodeById(`dot-${CURR_SLIDER_IDX}`);
+  // set full dot
+  setFullDot(CURR_SLIDER_IDX);
+};
+
+// change slide every 2 seconds when there is no interactions
+let startInterval = setInterval(automChangeSlides, 4000, "");
+
+/**
  * create left arrow-button that changes the images in the left direction
  *
  *@param {object} parentObj parent object of image
@@ -207,6 +186,9 @@ const crtLeftArrow = (parentObj) => {
     dltNodeById(`dot-${CURR_SLIDER_IDX}`);
     // set full dot
     setFullDot(CURR_SLIDER_IDX);
+    // restart timer
+    clearInterval(startInterval);
+    startInterval = setInterval(automChangeSlides, 4000, "");
   });
 };
 
@@ -234,7 +216,63 @@ const crtRightArrow = (parentObj) => {
     dltNodeById(`dot-${CURR_SLIDER_IDX}`);
     // set full dot
     setFullDot(CURR_SLIDER_IDX);
+    // reset timer
+    clearInterval(startInterval);
+    startInterval = setInterval(automChangeSlides, 4000, "");
   });
+};
+
+/**
+ * event listeners for the empty dots
+ *
+ * @param {object}
+ */
+const dotEvent = (objEvent) => {
+  const obj = objEvent;
+  obj.addEventListener("click", (e) => {
+    // delete old image
+    dltNodeById(`image-${CURR_SLIDER_IDX}`);
+    // delete old full dot
+    dltNodeById(`dot-${CURR_SLIDER_IDX}`);
+    // create old empty dot
+    setEmptyDot(CURR_SLIDER_IDX);
+    // update the CURRENT_SLIDER_IDX !!!!!!!!!!!!!
+    // get slideshow-container to load new image
+    const parentSlide = e.target.parentElement.parentElement.parentElement;
+    CURR_SLIDER_IDX = dotCalIdx(e);
+    // load new image with revcieved idx
+    addSlide(parentSlide, CURR_SLIDER_IDX);
+    // delete empty dot of new image
+    dltNodeById(`dot-${CURR_SLIDER_IDX}`);
+    // set full dot
+    setFullDot(CURR_SLIDER_IDX);
+    // reset timer
+    clearInterval(startInterval);
+    startInterval = setInterval(automChangeSlides, 4000, "");
+  });
+};
+
+/**
+ * create the empty dots for images in ARR_SLIDER
+ * this function is only used in the beginning
+ */
+const dots = () => {
+  const dotsCon = NodeFac("div", "slideshow-container").crtNode();
+  dotsCon.id = "dots-container";
+  for (let i = 0; i < ARR_SLIDER.length; i += 1) {
+    // create parent div for each dot
+    const dotDiv = NodeFac("div", "dots-container").crtNode();
+    dotDiv.id = `id-div-dot-${i}`;
+    // create dot icon
+    const currDot = new Image();
+    currDot.src = dotEmpty;
+    currDot.id = `dot-${i}`;
+    currDot.className = "dot";
+    dotDiv.appendChild(currDot);
+
+    // add eventlistener
+    dotEvent(currDot);
+  }
 };
 
 /**
